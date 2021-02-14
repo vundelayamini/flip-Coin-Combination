@@ -34,6 +34,50 @@ declare -A Doublet
         echo "TH" $percentageTH
 
 }
+ declare -A Triplet
+
+function percentageThriplet() {
+
+	percentageHHH=$(( (${thriplet[HHH]}/20)*100 ))
+	echo "HHH" $percentagehHH
+
+	 percentageHHT=$(( (${thriplet[HHT]}/20)*100 ))
+        echo "HHT" $percentagehHT
+
+	 percentageHTH=$(( (${thriplet[HTH]}/20)*100 ))
+        echo "HTH" $percentagehTH
+
+	 percentageTHH=$(( (${thriplet[THH]}/20)*100 ))
+        echo "THH" $percentagetHH
+
+	 percentageHTT=$(( (${thriplet[HTT]}/20)*100 ))
+        echo "HTT" $percentagehTT
+
+	 percentageTHT=$(( (${thriplet[THT]}/20)*100 ))
+        echo "THT" $percentageThT
+
+	 percentageTTH=$(( (${thriplet[TTH]}/20)*100 ))
+        echo "TTH" $percentagetTH
+
+	 percentageTTT=$(( (${thriplet[TTT]}/20)*100 ))
+        echo "TTT" $percentagetTT
+
+}
+for (( i=1; i<=20; i++ ))
+do
+	flip=$((RANDOM%2))
+	if (( $flip==1 ))
+	then
+		echo "head won"
+		((coutHeadWin++))
+		 singlet[H]=$coutHeadWin
+	else
+		echo "tails won"
+		((countTailsWin++))
+		singlet[T]=$countTailsWin
+	fi
+done
+
 
 for (( i=1; i<=20; i++ ))
 do
@@ -69,7 +113,60 @@ do
         fi
 done
 
+for (( i=1; i<=20; i++ ))
+do
+        flipCoin=$((RANDOM%2))
+        if (( $flipCoin==1 ))
+        then
+                echo "HHH"
+                ((hHH++))
+                thriplet[HHH]=$hHH
+        elif (( $flipCoin==0 ))
+        then
+                echo "HHT"
+                ((hHT++))
+                thriplet[HHT]=$hHT
+	elif (( $flipCoin==0  ))
+        then
+                echo "HTH"
+                ((hTH++))
+                thriplet[HTH]=$hHT
+	 elif (( $flipCoin==1 ))
+        then
+                echo "THH"
+                ((tHH++))
+                thriplet[THH]=$tHH
+	 elif (( $flipCoin==0 ))
+        then
+                echo "HTT"
+                ((hTT++))
+                thriplet[HTT]=$hTT
+	 elif (( $flipCoin==1 ))
+        then
+                echo "THT"
+                ((tHT++))
+                thriplet[THT]=$tHT
+	 elif (( $flipCoin==0 ))
+        then
+                echo "TTH"
+                ((tTH++))
+                thriplet[TTH]=$tHT
+	 elif (( $flipCoi==1 ))
+        then
+                echo "TTT"
+                ((tTT++))
+                thriplet[TTT]=$tTT
+	else
+		echo "false"
+   fi
+done
 echo "[ ${singlet[@]} ]"
+echo "[ ${!singlet[@]} ]"
 echo "[ ${doublet[@]} ]"
-percentagesinglet
+echo "[ ${!doublet[@]} ]"
+echo "[ ${thriplet[@]} ]"
+echo "[ ${!thriplet[@]} ]"
+
+percentageSinglet
 percentageDoublet
+percentageThriplet
